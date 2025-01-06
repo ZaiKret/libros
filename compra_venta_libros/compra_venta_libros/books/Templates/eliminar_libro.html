@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Eliminar Libro</h1>
+    <p>¿Estás seguro de que deseas eliminar el libro "{{ libro.titulo }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="/libro/{{ libro.id }}/" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

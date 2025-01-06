@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Comprar el libro {{ libro.titulo }}</h1>
+    <p><strong>Precio:</strong> ${{ libro.precio|floatformat:2 }}</p>
+
+    <form action="{% url 'realizar_pago' libro.id %}" method="POST">
+        {% csrf_token %}
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="{{ STRIPE_TEST_PUBLIC_KEY }}"  <!-- Usar la clave pública de Stripe -->
+                data-amount="{{ libro.precio|floatformat:2 }}"  <!-- Mostrar precio con 2 decimales -->
+                data-name="Compra Libro"
+                data-description="Compra de {{ libro.titulo }}"
+                data-currency="usd">
+        </script>
+    </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ libro.titulo }}</h1>
+    <p><strong>Autor:</strong> {{ libro.autor }}</p>
+    <p><strong>Categoría:</strong> {{ libro.categoria }}</p>
+    <p><strong>Descripción:</strong> {{ libro.descripcion }}</p>
+    <p><strong>Precio:</strong> {{ libro.precio|floatformat:2 }}€</p>
+
+    <a href="/libro/{{ libro.id }}/editar/" class="btn btn-warning">Editar</a>
+    <a href="/libro/{{ libro.id }}/eliminar/" class="btn btn-danger confirmar-eliminacion">Eliminar</a>
+    <a href="{% url 'realizar_pago' libro.id %}" class="btn btn-primary">Comprar</a>
+    <a href="/" class="btn btn-secondary">Volver</a>
+
+    <script>
+        document.querySelector('.confirmar-eliminacion').addEventListener('click', function(event) {
+            if (!confirm('¿Estás seguro de que quieres eliminar este libro?')) {
+                event.preventDefault();
+            }
+        });
+    </script>
+{% endblock %}
